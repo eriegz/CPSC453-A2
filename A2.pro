@@ -16,7 +16,8 @@ include(deployment.pri)
 
 HEADERS += \
     MD2Viewer.h \
-    OpenGLWindow.h
+    OpenGLWindow.h \
+    MD2Viewer/MD2Viewer.h
 
 DISTFILES += \
     shaders/interpColour.fs \
