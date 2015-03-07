@@ -1,12 +1,26 @@
-#ifndef MD2VIEWER_H
-#define MD2VIEWER_H
+//The following 5 brought in from openglwindow main.cpp
+#include <QtGui/QGuiApplication>
+#include <QtGui/QMatrix4x4>
+#include <QtGui/QOpenGLShaderProgram>
+#include <QtGui/QScreen>
+#include <QtCore/qmath.h>
 
+#include "OpenGLWindow.h"
 
-class MD2Viewer
-{
+class MD2Viewer : public OpenGLWindow{
 public:
     MD2Viewer();
-    ~MD2Viewer();
-};
 
-#endif // MD2VIEWER_H
+    void initialize() Q_DECL_OVERRIDE;
+    void render() Q_DECL_OVERRIDE;
+
+private:
+    GLuint loadShader(GLenum type, const char *source);
+
+    GLuint m_posAttr;
+    GLuint m_colAttr;
+    GLuint m_matrixUniform;
+
+    QOpenGLShaderProgram *m_program;
+    int m_frame;
+};

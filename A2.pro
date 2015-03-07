@@ -3,7 +3,8 @@ TEMPLATE = app
 QT += qml quick widgets
 
 SOURCES += main.cpp \
-    md2viewer.cpp
+    MD2Viewer.cpp \
+    OpenGLWindow.cpp
 
 RESOURCES += qml.qrc
 
@@ -14,4 +15,5 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    md2viewer.h
+    MD2Viewer.h \
+    OpenGLWindow.h

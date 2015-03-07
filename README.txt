@@ -3,7 +3,8 @@ UCID: 00311775
 
 — Notes: —
 
-	This program has been designed to run on the University of Calgary’s Linux distributions
+	This program has been designed to run in Qt Creator on the University of Calgary’s Linux
+	distributions.
 
 	Details:
 
