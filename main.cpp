@@ -1,7 +1,7 @@
 #include <QApplication>
 //#include <QQmlApplicationEngine>
 
-#include "MD2Viewer.h"
+#include "MD2Viewer/MD2Viewer.h"
 
 int main(int argc, char *argv[]){
     QApplication myApp(argc, argv);

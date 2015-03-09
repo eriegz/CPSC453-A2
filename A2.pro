@@ -3,8 +3,8 @@ TEMPLATE = app
 QT += qml quick widgets
 
 SOURCES += main.cpp \
-    MD2Viewer.cpp \
-    OpenGLWindow.cpp
+    MD2Viewer/MD2Viewer.cpp \
+    OpenGLWindow/OpenGLWindow.cpp
 
 RESOURCES += qml.qrc
 
@@ -15,9 +15,8 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    MD2Viewer.h \
-    OpenGLWindow.h \
-    MD2Viewer/MD2Viewer.h
+    MD2Viewer/MD2Viewer.h \
+    OpenGLWindow/OpenGLWindow.h
 
 DISTFILES += \
     shaders/interpColour.fs \

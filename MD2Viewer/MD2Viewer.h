@@ -5,7 +5,7 @@
 #include <QtGui/QScreen>
 #include <QtCore/qmath.h>
 
-#include "OpenGLWindow.h"
+#include "OpenGLWindow/OpenGLWindow.h"
 
 class MD2Viewer : public OpenGLWindow{
 public:

@@ -1,4 +1,4 @@
-#include "MD2Viewer.h"
+#include "MD2Viewer/MD2Viewer.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtGui/QOpenGLContext>
@@ -11,6 +11,7 @@ MD2Viewer::MD2Viewer()
 {
 }
 
+//*
 static const char *vertexShaderSource =
     "attribute highp vec4 posAttr;\n"
     "attribute lowp vec4 colAttr;\n"
@@ -26,6 +27,7 @@ static const char *fragmentShaderSource =
     "void main() {\n"
     "   gl_FragColor = col;\n"
     "}\n";
+//*/
 
 GLuint MD2Viewer::loadShader(GLenum type, const char *source){
     GLuint shader = glCreateShader(type);
