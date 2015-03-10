@@ -1,11 +1,6 @@
-#include "md2.h"
+#include "MD2Loader.h"
 
-//// ----------------------------------------------
-//// initialize the 21 MD2 model animations.
-//// ----------------------------------------------
-////
-anim_t MD2::animlist[ 21 ] = 
-{
+anim_t MD2Loader::animlist[ 21 ] = {
 	// first, last, fps
 
 	{   0,  39,  9 },	// STAND

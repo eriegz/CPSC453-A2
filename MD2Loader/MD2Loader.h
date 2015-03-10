@@ -1,15 +1,5 @@
-//
-//	md2.h - header file
-//
-
-
-
-#ifndef		MD2_H
-#define		MD2_H
-
-
 // magic number "IDP2" or 844121161
-#define MD2_ID				(('2'<<24) + ('P'<<16) + ('D'<<8) + 'I')
+#define MD2_ID                  (('2'<<24) + ('P'<<16) + ('D'<<8) + 'I')
 
 // model version
 #define	MD2_VERSION				8
@@ -17,18 +7,14 @@
 // maximum number of vertices for a MD2 model
 #define MAX_MD2_VERTS			2048
 
-#include	<GL/glut.h>
+#include	<GLUT/glut.h>
 #include	<fstream>
-
-
 
 typedef float vec3_t[3];
 
-
-
-// md2 header
-typedef struct
-{
+// ===================== Our various structs ============================
+// MD2 header
+typedef struct{
 	int		id;					// magic number. must be equal to "IPD2"
 	int		version;			// md2 version. must be equal to 8
 
@@ -52,53 +38,37 @@ typedef struct
 
 } md2_t;
 
-
-typedef struct
-{
+typedef struct{
 	short u,v;
 } tex_coord;
 
-
 // triangle
-typedef struct
-{
+typedef struct{
     short   index_xyz[3];    // indexes to triangle's vertices
     short   index_st[3];     // indexes to vertices' texture coorinates
-
 } triangle_t;
 
 // vertex
-typedef struct
-{
+typedef struct{
 	unsigned char	v[3];				// compressed vertex' (x, y, z) coordinates
 	unsigned char	lightnormalindex;	// index to a normal vector for the lighting
-
 } vertex_t;
 
-
-
 // frame
-typedef struct
-{
+typedef struct{
 	float		scale[3];		// scale values
 	float		translate[3];	// translation vector
 	char		name[16];		// frame name
 	vertex_t	verts[1];		// first vertex of this frame
-
 } frame_t;
 
-
-
 // animation
-typedef struct
-{
+typedef struct{
 	int		first_frame;			// first frame of the animation
 	int		last_frame;				// number of frames
 	int		fps;					// number of frames per second
 
 } anim_t;
-
-
 
 // animation list
 typedef enum {
@@ -125,44 +95,30 @@ typedef enum {
 	BOOM,
 
 	MAX_ANIMATIONS
-
 } animType_t;
 
-
-
-
-// ==============================================
-// CMD2Model - MD2 model class object.
-// ==============================================
-
-class MD2
-{
+// ================= CMD2Model - MD2 model class object ==================
+class MD2Loader{
 public:
 	// constructor/destructor
-	MD2( void );
-	virtual ~MD2( void );
-
+    MD2Loader( void );
+    virtual ~MD2Loader( void );
 
 	// functions
 	bool	LoadModel( const char *filename );
 
-//private:
 	int				num_frames;			// number of frames
 	int				num_xyz;			// number of vertices
 	int				num_tris;			// number of triangles
-
 	int				skin_width;
 	int				skin_height;
-
 	vec3_t			*m_vertices;		// vertex array
 	tex_coord		*texs;
 	triangle_t		*tris;
-
 	static anim_t animlist[21];
 };
 
-inline MD2::MD2( void )
-{
+inline MD2Loader::MD2Loader( void ){
 	m_vertices		= 0;
 	num_frames		= 0;
 	num_xyz			= 0;
@@ -171,15 +127,13 @@ inline MD2::MD2( void )
 	tris			= 0;
 }
 
-inline MD2::~MD2( void )
-{
+inline MD2Loader::~MD2Loader( void ){
 	if(m_vertices) delete [] m_vertices;
 	if(texs) delete [] texs;
 	if(tris) delete [] tris;
 }
 
-inline bool MD2::LoadModel( const char *filename )
-{
+inline bool MD2Loader::LoadModel( const char *filename ){
 	std::ifstream	file;			// file stream
 	md2_t			header;			// md2 header
 	char			*buffer;		// buffer storing frame data
@@ -245,8 +199,7 @@ inline bool MD2::LoadModel( const char *filename )
 
 
 	// vertex array initialization
-	for( int j = 0; j < num_frames; j++ )
-	{
+    for( int j = 0; j < num_frames; j++ ){
 		// ajust pointers
 		frame		= (frame_t *)&buffer[ header.framesize * j ];
 		ptrverts	= &m_vertices[ num_xyz * j ];
@@ -267,5 +220,3 @@ inline bool MD2::LoadModel( const char *filename )
 	file.close();
 	return true;
 }
-
-#endif	// MD2_H

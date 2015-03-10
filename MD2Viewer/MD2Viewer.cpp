@@ -1,4 +1,5 @@
-#include "MD2Viewer/MD2Viewer.h"
+#include "MD2Viewer.h"
+#include "MD2Loader/MD2Loader.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtGui/QOpenGLContext>
@@ -50,6 +51,8 @@ void MD2Viewer::render(){
 
     m_program->setUniformValue(m_matrixUniform, matrix);
 
+    //Code to create and display a tri-coloured triangle
+    /*
     GLfloat vertices[] = {
         0.0f, 0.707f,
         -0.5f, -0.5f,
@@ -72,8 +75,9 @@ void MD2Viewer::render(){
 
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(0);
+    */
 
     m_program->release();
 
-    ++m_frame;
+    m_frame++;
 }
