@@ -22,4 +22,6 @@ private:
 
     QOpenGLShaderProgram *m_program;
     int m_frame;
+
+    //MD2Loader myMD2Loader;
 };

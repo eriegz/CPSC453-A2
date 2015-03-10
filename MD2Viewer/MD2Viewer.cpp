@@ -33,6 +33,9 @@ void MD2Viewer::initialize(){
     m_posAttr = m_program->attributeLocation("posAttr");
     m_colAttr = m_program->attributeLocation("colAttr");
     m_matrixUniform = m_program->uniformLocation("matrix");
+
+    //Load our MD2 file
+    //myMD2Loader.LoadModel("../../../../A2/3D_MD2_Models/invader/tris.md2");
 }
 
 void MD2Viewer::render(){
@@ -50,6 +53,13 @@ void MD2Viewer::render(){
     //matrix.rotate(100.0f * m_frame / screen()->refreshRate(), 0, 1, 0);
 
     m_program->setUniformValue(m_matrixUniform, matrix);
+
+    /*
+    cout << "MD2 file statistics:" << endl;
+    cout << "   - myMD2Loader.num_frames = " << myMD2Loader.num_frames << endl;
+    cout << "   - myMD2Loader.num_xyz = " << myMD2Loader.num_xyz << endl;
+    cout << "   - myMD2Loader.num_tris = " << myMD2Loader.num_tris << endl;
+    */
 
     //Code to create and display a tri-coloured triangle
     /*
