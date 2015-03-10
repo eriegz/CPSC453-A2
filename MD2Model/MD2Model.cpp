@@ -1,8 +1,7 @@
 #include "MD2Model.h"
 
-anim_t MD2Loader::animlist[ 21 ] = {
+anim_t MD2Model::animlist[ 21 ] = {
 	// first, last, fps
-
 	{   0,  39,  9 },	// STAND
 	{  40,  45, 10 },	// RUN
 	{  46,  53, 10 },	// ATTACK

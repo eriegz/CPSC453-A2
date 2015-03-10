@@ -1,5 +1,5 @@
 #include "MD2Viewer.h"
-#include "MD2Loader/MD2Loader.h"
+#include "MD2Model/MD2Model.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtGui/QOpenGLContext>
@@ -27,8 +27,10 @@ void MD2Viewer::initialize(){
     m_program = new QOpenGLShaderProgram(this);
     //The following relative path names are so hideous b/c I don't know how to copy
     //my shaders into the .app build. Will fix this if I have time left.
-    m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/interpColour.vs");
-    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/interpColour.fs");
+    //m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/interpColour.vs");
+    m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/Phong.vs.glsl");
+    //m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/interpColour.fs");
+    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/Phong.fs.glsl");
     m_program->link();
     m_posAttr = m_program->attributeLocation("posAttr");
     m_colAttr = m_program->attributeLocation("colAttr");
@@ -62,7 +64,7 @@ void MD2Viewer::render(){
     */
 
     //Code to create and display a tri-coloured triangle
-    /*
+    ///*
     GLfloat vertices[] = {
         0.0f, 0.707f,
         -0.5f, -0.5f,
@@ -85,7 +87,7 @@ void MD2Viewer::render(){
 
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(0);
-    */
+    //*/
 
     m_program->release();
 

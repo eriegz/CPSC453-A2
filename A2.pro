@@ -5,7 +5,8 @@ QT += qml quick widgets
 SOURCES += main.cpp \
     MD2Viewer/MD2Viewer.cpp \
     OpenGLWindow/OpenGLWindow.cpp \
-    MD2Model/MD2Model.cpp
+    MD2Model/MD2Model.cpp \
+    ShaderLoader/ShaderLoader.cpp
 
 RESOURCES += qml.qrc
 
@@ -18,8 +19,9 @@ include(deployment.pri)
 HEADERS += \
     MD2Viewer/MD2Viewer.h \
     OpenGLWindow/OpenGLWindow.h \
-    MD2Model/MD2Model.h
+    MD2Model/MD2Model.h \
+    ShaderLoader/ShaderLoader.h
 
 DISTFILES += \
-    shaders/interpColour.fs \
-    shaders/interpColour.vs
+    shaders/Phong.fs.glsl \
+    shaders/Phong.vs.glsl

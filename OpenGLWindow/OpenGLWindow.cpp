@@ -38,7 +38,7 @@
 **
 ****************************************************************************/
 
-#include "OpenGLWindow/OpenGLWindow.h"
+#include "OpenGLWindow.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtGui/QOpenGLContext>
