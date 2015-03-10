@@ -1,4 +1,3 @@
-//The following 5 brought in from openglwindow main.cpp
 #include <QtGui/QGuiApplication>
 #include <QtGui/QMatrix4x4>
 #include <QtGui/QOpenGLShaderProgram>

@@ -45,13 +45,16 @@
 #include <QtGui/QOpenGLPaintDevice>
 #include <QtGui/QPainter>
 
+#include <iostream>
+using namespace std;
+
 OpenGLWindow::OpenGLWindow(QWindow *parent)
-    : QWindow(parent)
-    , m_update_pending(false)
-    , m_animating(false)
-    , m_context(0)
-    , m_device(0)
-{
+    : QWindow(parent){
+    cout << "OpenGLWindow::OpenGLWindow(QWindow *parent) gets called." << endl;
+    m_update_pending = false;
+    m_animating = false;
+    m_context = 0;
+    m_device = 0;
     setSurfaceType(QWindow::OpenGLSurface);
 }
 

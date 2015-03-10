@@ -17,7 +17,7 @@ int main(int argc, char *argv[]){
     myMD2Viewer.setFormat(format);
     myMD2Viewer.resize(640, 480);
     myMD2Viewer.show();
-    myMD2Viewer.setAnimating(true);
+    //myMD2Viewer.setAnimating(true);
 
     return myApp.exec();
 }
