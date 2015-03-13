@@ -28,7 +28,6 @@ ShaderLoader::ShaderLoader(){
     glfwSetKeyCallback(window, key_callback);
 
     // Inform OpenGL we're working with the new version
-    //FUCK GLEW, FUCKING PIECE OF SHIT LIBRARY
     /*
     glewExperimental = GL_TRUE;
     GLenum err = glewInit();
@@ -129,13 +128,13 @@ void ShaderLoader::setupRenderingContext() {
   if( !loadShaderFile("../../../../A2/shaders/interpColour.vs", vertShader) ) {
     glDeleteShader( vertShader );
     glDeleteShader( fragShader );
-    cout << "The shader " << "Phong.vs.glsl" << " could not be found." << endl;
+    cout << "The shader 'interpColour.vs' could not be found." << endl;
   }
   //if( !loadShaderFile("../../../../A2/shaders/Phong.fs.glsl", fragShader) ) {
   if( !loadShaderFile("../../../../A2/shaders/interpColour.fs", fragShader) ) {
     glDeleteShader( vertShader );
     glDeleteShader( fragShader );
-    cout << "The shader " << "Phong.fs.glsl" << " could not be found." << endl;
+    cout << "The shader 'interpColour.fs' could not be found." << endl;
   }
 
   glCompileShader(vertShader);
@@ -148,7 +147,8 @@ void ShaderLoader::setupRenderingContext() {
     char infoLog[8192];
     glGetShaderSource( vertShader, 8192, NULL, source );
     glGetShaderInfoLog( vertShader, 8192, NULL, infoLog);
-    cout << "The shader: " << endl << (const char*)source << endl << " failed to compile:" << endl;
+    //cout << "The shader: " << endl << (const char*)source << endl << " failed to compile:" << endl;
+    cout << "============= Vertex shader compilation failed ===============" << endl;
     fprintf( stderr, "%s\n", infoLog);
     glDeleteShader(vertShader);
     glDeleteShader(fragShader);
@@ -159,7 +159,8 @@ void ShaderLoader::setupRenderingContext() {
     char infoLog[8192];
     glGetShaderSource( fragShader, 8192, NULL, source);
     glGetShaderInfoLog( fragShader, 8192, NULL, infoLog);
-    cout << "The shader: " << endl << (const char*)source << endl << " failed to compile:" << endl;
+    //cout << "The shader: " << endl << (const char*)source << endl << " failed to compile:" << endl;
+    cout << "============= Fragment shader compilation failed ===============" << endl;
     fprintf( stderr, "%s\n", infoLog);
     glDeleteShader(vertShader);
     glDeleteShader(fragShader);
@@ -187,12 +188,11 @@ void ShaderLoader::setupRenderingContext() {
     myShaderProgram = (GLuint)NULL;
   }
 
-  // Now setup the geometry in a vertex buffer object
-
-  // setup the vertex state array object. All subsequent buffers will
+  // Now setup the geometry in a vertex buffer object.
+  // Setup the vertex state array object. All subsequent buffers will
   // be bound to it.
-  glGenVertexArraysAPPLE(1, myVAO);
-  glBindVertexArrayAPPLE(myVAO[0]);
+  glGenVertexArrays(1, myVAO);
+  glBindVertexArray(myVAO[0]);
 
   glGenBuffers(1, &myVBO);
   glBindBuffer( GL_ARRAY_BUFFER, myVBO );

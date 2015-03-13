@@ -1,7 +1,7 @@
 #ifndef SHADER_LOADER_H
 #define SHADER_LOADER_H
 
-#include <OpenGL/gl.h>
+#include <OpenGL/gl3.h>
 #include <OpenGL/glu.h>
 #include <GLFW/glfw3.h>
 
