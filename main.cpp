@@ -1,8 +1,10 @@
-//#include <GL/glew.h>
 #include <QApplication>
 //#include <QQmlApplicationEngine>
 
 #include "MD2Viewer/MD2Viewer.h"
+
+#include <iostream>
+using namespace std;
 
 int main(int argc, char *argv[]){
     QApplication myApp(argc, argv);
@@ -17,8 +19,8 @@ int main(int argc, char *argv[]){
     MD2Viewer myMD2Viewer;
     myMD2Viewer.setFormat(format);
     myMD2Viewer.resize(640, 480);
-    //myMD2Viewer.show();
-    //myMD2Viewer.setAnimating(true);
+    myMD2Viewer.show();
+    myMD2Viewer.setAnimating(true);
 
     return myApp.exec();
 }

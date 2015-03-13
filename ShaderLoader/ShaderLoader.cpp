@@ -1,7 +1,7 @@
 #include "ShaderLoader.h"
 
 ShaderLoader::ShaderLoader(){
-    cout << "ShaderLoader::ShaderLoader() is called." << endl;
+    /*
     GLFWwindow* window;
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
@@ -26,7 +26,11 @@ ShaderLoader::ShaderLoader(){
     }
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
+    */
 
+    // Commenting-out GLEW code because it's a piece of shit, and because including
+    // OpenGL/gl3.h fixes the only two problematic function calls, glGenVertexArrays
+    // and glBindVertexArray.
     // Inform OpenGL we're working with the new version
     /*
     glewExperimental = GL_TRUE;
@@ -40,13 +44,16 @@ ShaderLoader::ShaderLoader(){
     // These two lines will print out the version of OpenGL and GLSL
     // that are being used so that problems due to version differences
     // can easily be identified.
-    printf( "OpenGL version: %s\n", (const char*)glGetString(GL_VERSION) );
-    printf( "GLSL version: %s\n", (const char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
+    cout << "OpenGL version: " << (const char*)glGetString(GL_VERSION) << endl;
+    cout << "GLSL version: " << (const char*)glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
+    //printf( "OpenGL version: %s\n", (const char*)glGetString(GL_VERSION) );
+    //printf( "GLSL version: %s\n", (const char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
 
     // Do any necessary initializations (enabling buffers, setting up
     // shaders, geometry etc., before entering the main loop.)
     // This is done by calling the function setupRenderingContext().
-    setupRenderingContext();
+    initShaders();
+    /*
     if( myShaderProgram ) {
       while (!glfwWindowShouldClose(window)){
           int width, height;
@@ -63,9 +70,10 @@ ShaderLoader::ShaderLoader(){
     }
     glfwDestroyWindow(window);
     glfwTerminate();
+    */
 }
 
-bool ShaderLoader::loadShaderFile(const char *filename, GLuint shader) {
+bool ShaderLoader::openShaderFile(const char *filename, GLuint shader) {
   GLint shaderLength = 0;
   FILE *fp;
 
@@ -112,10 +120,12 @@ void ShaderLoader::renderScene() {
 
 // This function does any needed initialization on the rendering
 // context.
-void ShaderLoader::setupRenderingContext() {
+void ShaderLoader::initShaders() {
+    /*
   // Background
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
   glEnable(GL_DEPTH_TEST);
+  */
 
   // First setup the shaders
   //Now, let's setup the shaders
@@ -124,17 +134,17 @@ void ShaderLoader::setupRenderingContext() {
   myShaderProgram = (GLuint)NULL;
   GLint testVal;
 
-  //if( !loadShaderFile("../../../../A2/shaders/Phong.vs.glsl", vertShader) ) {
-  if( !loadShaderFile("../../../../A2/shaders/interpColour.vs", vertShader) ) {
+  if( !openShaderFile("../../../../A2/shaders/Phong.vs.glsl", vertShader) ) {
+  //if( !loadShaderFile("../../../../A2/shaders/interpColour.vs", vertShader) ) {
     glDeleteShader( vertShader );
     glDeleteShader( fragShader );
-    cout << "The shader 'interpColour.vs' could not be found." << endl;
+    cout << "Vertex shader 'Phong.vs.glsl' could not be found." << endl;
   }
-  //if( !loadShaderFile("../../../../A2/shaders/Phong.fs.glsl", fragShader) ) {
-  if( !loadShaderFile("../../../../A2/shaders/interpColour.fs", fragShader) ) {
+  if( !openShaderFile("../../../../A2/shaders/Phong.fs.glsl", fragShader) ) {
+  //if( !loadShaderFile("../../../../A2/shaders/interpColour.fs", fragShader) ) {
     glDeleteShader( vertShader );
     glDeleteShader( fragShader );
-    cout << "The shader 'interpColour.fs' could not be found." << endl;
+    cout << "Fragment shader 'Phong.fs.glsl' could not be found." << endl;
   }
 
   glCompileShader(vertShader);
@@ -224,6 +234,7 @@ void ShaderLoader::setupRenderingContext() {
                          (const GLvoid*)(sizeof(tetVertices)));
 }
 
+/*
 // Keyboard callback function.
 void ShaderLoader::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -239,3 +250,4 @@ void ShaderLoader::ChangeSize(int w, int h) {
   // Set Viewport to window dimensions
   glViewport(0, 0, w, h);
 }
+*/

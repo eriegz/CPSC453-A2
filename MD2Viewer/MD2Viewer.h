@@ -4,9 +4,14 @@
 #include <QtGui/QScreen>
 #include <QtCore/qmath.h>
 
+#include <QtCore/QCoreApplication>
+#include <QtGui/QOpenGLContext>
+#include <QtGui/QOpenGLPaintDevice>
+#include <QtGui/QPainter>
+
 #include "OpenGLWindow/OpenGLWindow.h"
-#include "ShaderLoader/ShaderLoader.h"
-#include "MD2Model/MD2Model.h"
+//#include "ShaderLoader/ShaderLoader.h"
+//#include "MD2Model/MD2Model.h"
 
 class MD2Viewer : public OpenGLWindow{
 public:
@@ -25,6 +30,6 @@ private:
     QOpenGLShaderProgram *m_program;
     int m_frame;
 
-    MD2Model myMD2Model;
-    ShaderLoader myShaderLoader;
+    //MD2Model myMD2Model;
+    //ShaderLoader myShaderLoader;
 };

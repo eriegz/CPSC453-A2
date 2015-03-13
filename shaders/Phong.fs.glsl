@@ -1,10 +1,11 @@
-//#version 410 core
+#version 410 core
 
 // Output
 layout (location = 0) out vec4 color;
 
 // Input from vertex shader
-in VS_OUT{
+in VS_OUT
+{
     vec3 N;
     vec3 L;
     vec3 V;
@@ -16,7 +17,8 @@ uniform vec3 specular_albedo = vec3(0.7);
 uniform float specular_power = 128.0;
 uniform vec3 ambient = vec3(0.1, 0.1, 0.1);
 
-void main(void){
+void main(void)
+{
     // Normalize the incoming N, L and V vectors
     vec3 N = normalize(fs_in.N);
     vec3 L = normalize(fs_in.L);
