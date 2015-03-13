@@ -25,3 +25,13 @@ HEADERS += \
 DISTFILES += \
     shaders/Phong.fs.glsl \
     shaders/Phong.vs.glsl
+
+macx: LIBS += -L$$PWD/../../../../../../../../usr/local/Cellar/glew/1.11.0/lib/ -lGLEW
+
+INCLUDEPATH += $$PWD/../../../../../../../../usr/local/Cellar/glew/1.11.0/include
+DEPENDPATH += $$PWD/../../../../../../../../usr/local/Cellar/glew/1.11.0/include
+
+macx: LIBS += -L$$PWD/../../../../../../../../usr/local/Cellar/glfw3/3.1/lib/ -lglfw3
+
+INCLUDEPATH += $$PWD/../../../../../../../../usr/local/Cellar/glfw3/3.1/include
+DEPENDPATH += $$PWD/../../../../../../../../usr/local/Cellar/glfw3/3.1/include

@@ -5,6 +5,8 @@
 #include <QtCore/qmath.h>
 
 #include "OpenGLWindow/OpenGLWindow.h"
+#include "ShaderLoader/ShaderLoader.h"
+#include "MD2Model/MD2Model.h"
 
 class MD2Viewer : public OpenGLWindow{
 public:
@@ -23,5 +25,6 @@ private:
     QOpenGLShaderProgram *m_program;
     int m_frame;
 
-    //MD2Loader myMD2Loader;
+    MD2Model myMD2Model;
+    ShaderLoader myShaderLoader;
 };

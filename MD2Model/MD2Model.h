@@ -1,9 +1,7 @@
 // magic number "IDP2" or 844121161
 #define MD2_ID                  (('2'<<24) + ('P'<<16) + ('D'<<8) + 'I')
-
 // model version
 #define	MD2_VERSION				8
-
 // maximum number of vertices for a MD2 model
 #define MAX_MD2_VERTS			2048
 
@@ -12,36 +10,38 @@
 #include <iostream>
 using namespace std;
 
+#ifndef MD2MODEL_H
+#define MD2MODEL_H
 typedef float vec3_t[3];
 
 // ===================== Our various structs ============================
 // MD2 header
+struct md2_t{
+    int		id;					// magic number. must be equal to "IPD2"
+    int		version;			// md2 version. must be equal to 8
+
+    int		skinwidth;			// width of the texture
+    int		skinheight;			// height of the texture
+    int		framesize;			// size of one frame in bytes
+
+    int		num_skins;			// number of textures
+    int		num_xyz;			// number of vertices
+    int		num_st;				// number of texture coordinates
+    int		num_tris;			// number of triangles
+    int		num_glcmds;			// number of opengl commands
+    int		num_frames;			// total number of frames
+
+    int		ofs_skins;			// offset to skin names (64 bytes each)
+    int		ofs_st;				// offset to s-t texture coordinates
+    int		ofs_tris;			// offset to triangles
+    int		ofs_frames;			// offset to frame data
+    int		ofs_glcmds;			// offset to opengl commands
+    int		ofs_end;			// offset to the end of file
+
+};
+
 typedef struct{
-	int		id;					// magic number. must be equal to "IPD2"
-	int		version;			// md2 version. must be equal to 8
-
-	int		skinwidth;			// width of the texture
-	int		skinheight;			// height of the texture
-	int		framesize;			// size of one frame in bytes
-
-	int		num_skins;			// number of textures
-	int		num_xyz;			// number of vertices
-	int		num_st;				// number of texture coordinates
-	int		num_tris;			// number of triangles
-	int		num_glcmds;			// number of opengl commands
-	int		num_frames;			// total number of frames
-
-	int		ofs_skins;			// offset to skin names (64 bytes each)
-	int		ofs_st;				// offset to s-t texture coordinates
-	int		ofs_tris;			// offset to triangles
-	int		ofs_frames;			// offset to frame data
-	int		ofs_glcmds;			// offset to opengl commands
-	int		ofs_end;			// offset to the end of file
-
-} md2_t;
-
-typedef struct{
-	short u,v;
+    short u,v;
 } tex_coord;
 
 // triangle
@@ -52,51 +52,51 @@ typedef struct{
 
 // vertex
 typedef struct{
-	unsigned char	v[3];				// compressed vertex' (x, y, z) coordinates
-	unsigned char	lightnormalindex;	// index to a normal vector for the lighting
+    unsigned char	v[3];				// compressed vertex' (x, y, z) coordinates
+    unsigned char	lightnormalindex;	// index to a normal vector for the lighting
 } vertex_t;
 
 // frame
 typedef struct{
-	float		scale[3];		// scale values
-	float		translate[3];	// translation vector
-	char		name[16];		// frame name
-	vertex_t	verts[1];		// first vertex of this frame
+    float		scale[3];		// scale values
+    float		translate[3];	// translation vector
+    char		name[16];		// frame name
+    vertex_t	verts[1];		// first vertex of this frame
 } frame_t;
 
 // animation
 typedef struct{
-	int		first_frame;			// first frame of the animation
-	int		last_frame;				// number of frames
-	int		fps;					// number of frames per second
+    int		first_frame;			// first frame of the animation
+    int		last_frame;				// number of frames
+    int		fps;					// number of frames per second
 
 } anim_t;
 
 // animation list
 typedef enum {
-	STAND,
-	RUN,
-	ATTACK,
-	PAIN_A,
-	PAIN_B,
-	PAIN_C,
-	JUMP,
-	FLIP,
-	SALUTE,
-	FALLBACK,
-	WAVE,
-	POINT,
-	CROUCH_STAND,
-	CROUCH_WALK,
-	CROUCH_ATTACK,
-	CROUCH_PAIN,
-	CROUCH_DEATH, 
-	DEATH_FALLBACK,
-	DEATH_FALLFORWARD,
-	DEATH_FALLBACKSLOW,
-	BOOM,
+    STAND,
+    RUN,
+    ATTACK,
+    PAIN_A,
+    PAIN_B,
+    PAIN_C,
+    JUMP,
+    FLIP,
+    SALUTE,
+    FALLBACK,
+    WAVE,
+    POINT,
+    CROUCH_STAND,
+    CROUCH_WALK,
+    CROUCH_ATTACK,
+    CROUCH_PAIN,
+    CROUCH_DEATH,
+    DEATH_FALLBACK,
+    DEATH_FALLFORWARD,
+    DEATH_FALLBACKSLOW,
+    BOOM,
 
-	MAX_ANIMATIONS
+    MAX_ANIMATIONS
 } animType_t;
 
 // ================= CMD2Model - MD2 model class object ==================
@@ -117,7 +117,7 @@ public:
 	vec3_t			*m_vertices;		// vertex array
 	tex_coord		*texs;
 	triangle_t		*tris;
-	static anim_t animlist[21];
+    static anim_t animlist[21];
 };
 
 inline MD2Model::MD2Model( void ){
@@ -136,11 +136,11 @@ inline MD2Model::~MD2Model( void ){
 }
 
 inline bool MD2Model::LoadModel( const char *filename ){
-	std::ifstream	file;			// file stream
-	md2_t			header;			// md2 header
-	char			*buffer;		// buffer storing frame data
-	frame_t			*frame;			// temporary variable
-	vec3_t			*ptrverts;		// pointer on m_vertices
+    std::ifstream file;			// file stream
+    md2_t header;               // md2 header
+    char *buffer;               // buffer storing frame data
+    frame_t	*frame;             // temporary variable
+    vec3_t *ptrverts;           // pointer on m_vertices
 	
 	// try to open filename
 	file.open( filename, std::ios::in | std::ios::binary );
@@ -149,7 +149,7 @@ inline bool MD2Model::LoadModel( const char *filename ){
 		return false;
 
 	// read header file
-	file.read( (char *)&header, sizeof( md2_t ) );
+    file.read( (char *)&header, sizeof( md2_t ) );
 
     // ========= Verify that this is a MD2 file ==========
 	// check for the ident and the version number
@@ -206,3 +206,5 @@ inline bool MD2Model::LoadModel( const char *filename ){
     cout << "File " << filename << " loaded successfully." << endl;
 	return true;
 }
+
+#endif //MD2MODEL_H

@@ -1,5 +1,6 @@
 #include "MD2Viewer.h"
 #include "MD2Model/MD2Model.h"
+#include "ShaderLoader/ShaderLoader.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtGui/QOpenGLContext>
@@ -24,17 +25,27 @@ GLuint MD2Viewer::loadShader(GLenum type, const char *source){
 
 void MD2Viewer::initialize(){
     cout << "MD2Viewer::initialize() gets called." << endl;
-    m_program = new QOpenGLShaderProgram(this);
+    //m_program = new QOpenGLShaderProgram(this);
     //The following relative path names are so hideous b/c I don't know how to copy
     //my shaders into the .app build. Will fix this if I have time left.
     //m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/interpColour.vs");
-    m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/Phong.vs.glsl");
+    //m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/Phong.vs.glsl");
     //m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/interpColour.fs");
-    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/Phong.fs.glsl");
+    //m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/Phong.fs.glsl");
+
+    /*
     m_program->link();
     m_posAttr = m_program->attributeLocation("posAttr");
     m_colAttr = m_program->attributeLocation("colAttr");
     m_matrixUniform = m_program->uniformLocation("matrix");
+    */
+
+    //Load our shaders
+    /*
+    GLuint* myShader;
+    ShaderLoader(&myShader);
+    glCompileShader(myShader);
+    */
 
     //Load our MD2 file
     //myMD2Loader.LoadModel("../../../../A2/3D_MD2_Models/invader/tris.md2");
