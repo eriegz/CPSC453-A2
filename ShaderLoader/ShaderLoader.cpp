@@ -147,7 +147,6 @@ void ShaderLoader::setupRenderingContext() {
     char infoLog[8192];
     glGetShaderSource( vertShader, 8192, NULL, source );
     glGetShaderInfoLog( vertShader, 8192, NULL, infoLog);
-    //cout << "The shader: " << endl << (const char*)source << endl << " failed to compile:" << endl;
     cout << "============= Vertex shader compilation failed ===============" << endl;
     fprintf( stderr, "%s\n", infoLog);
     glDeleteShader(vertShader);
@@ -159,7 +158,6 @@ void ShaderLoader::setupRenderingContext() {
     char infoLog[8192];
     glGetShaderSource( fragShader, 8192, NULL, source);
     glGetShaderInfoLog( fragShader, 8192, NULL, infoLog);
-    //cout << "The shader: " << endl << (const char*)source << endl << " failed to compile:" << endl;
     cout << "============= Fragment shader compilation failed ===============" << endl;
     fprintf( stderr, "%s\n", infoLog);
     glDeleteShader(vertShader);
@@ -182,7 +180,7 @@ void ShaderLoader::setupRenderingContext() {
   if( testVal == GL_FALSE ) {
     char infoLog[1024];
     glGetProgramInfoLog( myShaderProgram, 1024, NULL, infoLog);
-    cout << "The shader program" << "(interpColour.vs + interpColour.fs) failed to link:"
+    cout << "The shader program (interpColour.vs + interpColour.fs) failed to link:"
          << endl << (const char*)infoLog << endl;
     glDeleteProgram(myShaderProgram);
     myShaderProgram = (GLuint)NULL;
