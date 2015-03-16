@@ -1,6 +1,6 @@
 #include "MD2Viewer.h"
 //#include "MD2Model/MD2Model.h"
-//#include "ShaderLoader/ShaderLoader.h"
+#include "ShaderLoader/ShaderLoader.h"
 
 #include <iostream>
 using namespace std;
@@ -11,42 +11,14 @@ MD2Viewer::MD2Viewer(){
     m_frame = 0;
 }
 
-/*
-GLuint MD2Viewer::loadShader(GLenum type, const char *source){
-    GLuint shader = glCreateShader(type);
-    glShaderSource(shader, 1, &source, 0);
-    glCompileShader(shader);
-    return shader;
-}*/
-
-static const char *vertexShaderSource =
-    "attribute highp vec4 posAttr;\n"
-    "attribute lowp vec4 colAttr;\n"
-    "varying lowp vec4 col;\n"
-    "uniform highp mat4 matrix;\n"
-    "void main() {\n"
-    "   col = colAttr;\n"
-    "   gl_Position = matrix * posAttr;\n"
-    "}\n";
-
-static const char *fragmentShaderSource =
-    "varying lowp vec4 col;\n"
-    "void main() {\n"
-    "   gl_FragColor = col;\n"
-    "}\n";
-
 void MD2Viewer::initialize(){
     cout << "MD2Viewer::initialize() gets called." << endl;
-    m_program = new QOpenGLShaderProgram(this);
-    m_program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexShaderSource);
-    m_program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSource);
 
-    //The following relative path names are so hideous b/c I don't know how to copy
-    //my shaders into the .app build. Will fix this if I have time left.
-    //m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/interpColour.vs");
-    //m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/Phong.vs.glsl");
-    //m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/interpColour.fs");
-    //m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/Phong.fs.glsl");
+    m_program = new QOpenGLShaderProgram(this);
+    //m_program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexShaderSource);
+    //m_program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSource);
+    m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/Triangle.vs.glsl");
+    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/Triangle.fs.glsl");
 
     m_program->link();
     m_posAttr = m_program->attributeLocation("posAttr");

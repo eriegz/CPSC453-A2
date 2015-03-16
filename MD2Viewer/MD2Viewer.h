@@ -10,7 +10,7 @@
 #include <QtGui/QPainter>
 
 #include "OpenGLWindow/OpenGLWindow.h"
-//#include "ShaderLoader/ShaderLoader.h"
+#include "ShaderLoader/ShaderLoader.h"
 //#include "MD2Model/MD2Model.h"
 
 class MD2Viewer : public OpenGLWindow{

@@ -22,9 +22,9 @@ public:
     bool openShaderFile(const char*, GLuint);
     void renderScene();
     void initShaders();
-    //static void key_callback(GLFWwindow*, int, int, int, int);
-    //static void error_callback(int, const char*);
-    //void ChangeSize(int, int);
+    static void key_callback(GLFWwindow*, int, int, int, int);
+    static void error_callback(int, const char*);
+    void ChangeSize(int, int);
 
 private:
     // VAO and VBO to handle vertex state and data
