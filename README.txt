@@ -3,49 +3,56 @@ UCID: 00311775
 
 — Notes: —
 
-	This program has been designed to run in Qt Creator on the University of Calgary’s Linux
-	distributions.
+	This assignment is unfinished. I spoke to Mario and told him that despite roughly 20 hours of
+	programming time, I have not been able to resolve multiple critical compatibility errors
+	between Qt and various libraries including GLEW, GLFW, and OpenGL. Mario asked me to
+	document these setbacks in my README file, which I have done below.
 
-	Details:
+	Note that these are just the ones I could remember. I have spent the majority of my
+	programming time googling errors and reading StackOverflow.
 
-	Linux version 3.14.5-200.fc20.x86_64 (mockbuild@bkernel02.phx2.fedoraproject.org)
-	(gcc version 4.8.2 20131212 (Red Hat 4.8.2-7) (GCC) )
+— Setbacks encountered in assignment 2: —
 
-	3rd party code used in this project:
-		Author: Samuel R. Buss
-			- TextureBMP.cpp (TextureBMP.h was added to accompany the former)
-			- RgbImage.h
-			- RgbImage.cpp
+	[Format used: - Problem	• Solution, if any.]
 
-— Compile / execution instructions: —
+	- Could not remote in to school computers to run tutorial 8 example code
+		• NO RESOLUTION
 
-	1. Download “A1.zip”
-	2. Extract zip file to location of your choice
-	3. Using Terminal, navigate into the extracted folder “A1”
-	4. Type “make” and press Enter
-	5. Type “./A1” and press Enter
+	- Problems compiling & running tutorial 8 example code on home machine
+		• installed GLEW
+		• installed GLFW
 
-— Operating instructions: —
+	- Qt not recognizing shaders past version 1.20
+		• Qt defaults to using legacy OpenGL profile. Need to use Core Profile.
 
-	1. IMPORTANT: To open, save, or dissolve to a file, simply type the name of which of the
-	bitmap images inside ./A1/Images you wish to open. For exampe:
+	- Cannot set OpenGL profile to Core Profile (i.e.: version 3.3)
+		• Use #include <QGLFormat>, create an instance of type QGLFormat, and use the 
+		  setVersion(3, 3) call to set the version
 
-		image filename: 	/A1/maggie.bmp
-		type: 			maggie
+	- Qt doesn’t recognize “#include <QGLFormat>”
+		• Add “QT += opengl” to project file
 
-	2. As commented inside the code, the dissolve function will only work if the two chosen
-	bitmaps are exactly the same dimensions. To this end, I recommend using “scenery.bmp”
-	and “maggie.bmp” to dissolve into each other, as I made sure they were both 400x400 pixels.
+	- Qt documentation recommends creating instance of object type “GLWidget” when it should
+	  be “QGLWidget”.
+		• Change to QGLWidget
 
-— Bonuses implemented: —
+	- After setting version number, “glGetString(GL_VERSION)” stopped responding
+		• NO RESOLUTION
 
-	1. Change contrast:
-		- Load an image, then select “Edit > Contrast”
-		- Follow the on-screen instructions
-	1. Dissolve image:
-		- Load an image, then select “Edit > Dissolve”
-		- Follow the on-screen instructions
+	- Qt creates object of type QOpenGLContext, defaults it to legacy OpenGL profile
+		• NO RESOLUTION
 
-— Miscellaneous: —
+— Functional accomplishments: —
 
-	Inside “A1/Examples” are saved .bmp files demonstrating all of the image transformations.
+	Re-structured an existing QApplication sample tutorial to form the basis for my MD2Viewer
+	functionality and windowing.
+
+	Re-factored the tutorial 8 Standalone example to be a class which provides shader loader
+	functionality to the QApplication.
+
+	Re-structured the MD2 file loader to be a class which provides functionality to the
+	QApplication.
+
+	Successfully loaded (but not compiled due to OpenGL default legacy profile) Assignment 2
+	shaders as .vs.glsl and .fs.glsl files into the QApplication.
+

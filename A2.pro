@@ -1,6 +1,7 @@
 TEMPLATE = app
 
 QT += qml quick widgets
+QT += opengl
 
 SOURCES += main.cpp \
     MD2Viewer/MD2Viewer.cpp \

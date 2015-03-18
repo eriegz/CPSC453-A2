@@ -2,12 +2,12 @@
 #include <QtGui/QMatrix4x4>
 #include <QtGui/QOpenGLShaderProgram>
 #include <QtGui/QScreen>
-#include <QtCore/qmath.h>
-
-#include <QtCore/QCoreApplication>
 #include <QtGui/QOpenGLContext>
 #include <QtGui/QOpenGLPaintDevice>
 #include <QtGui/QPainter>
+
+#include <QtCore/qmath.h>
+#include <QtCore/QCoreApplication>
 
 #include "OpenGLWindow/OpenGLWindow.h"
 #include "ShaderLoader/ShaderLoader.h"

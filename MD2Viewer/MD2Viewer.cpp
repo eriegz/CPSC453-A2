@@ -12,13 +12,14 @@ MD2Viewer::MD2Viewer(){
 }
 
 void MD2Viewer::initialize(){
-    cout << "MD2Viewer::initialize() gets called." << endl;
+    cout << "glGetString(GL_VERSION) = " << glGetString(GL_VERSION) << endl;
+    cout << "glGetString(GL_SHADING_LANGUAGE_VERSION) = " << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
 
     m_program = new QOpenGLShaderProgram(this);
-    //m_program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexShaderSource);
-    //m_program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSource);
-    m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/Triangle.vs.glsl");
-    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/Triangle.fs.glsl");
+    //m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/Triangle.vs.glsl");
+    m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "../../../../A2/shaders/Phong.vs.glsl");
+    //m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/Triangle.fs.glsl");
+    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "../../../../A2/shaders/Phong.fs.glsl");
 
     m_program->link();
     m_posAttr = m_program->attributeLocation("posAttr");
@@ -33,7 +34,6 @@ void MD2Viewer::initialize(){
 }
 
 void MD2Viewer::render(){
-    cout << "MD2Viewer::render() gets called." << endl;
     const qreal retinaScale = devicePixelRatio();
     glViewport(0, 0, width() * retinaScale, height() * retinaScale);
 
